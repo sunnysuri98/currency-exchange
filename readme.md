@@ -1,4 +1,4 @@
-# Currency Exchange CLI
+# Currency Exchange
 
 Currency Exchange is a command-line tool written in Rust that facilitates currency conversion using real-time exchange rate data obtained from an API.
 
