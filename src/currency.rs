@@ -5,6 +5,7 @@ use std::{
     io::{self, Write},
 };
 
+
 pub const CURRENCY_LIST: [&str; 31] = [
     "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR",
     "ILS", "INR", "ISK", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "SEK",
@@ -24,11 +25,11 @@ pub fn currency_conversion(
     let client = Client::new();
     let resp = client.get(&url).send().expect("unable to get response");
     let value: Value = resp.json().expect("unable to parse json");
-    let countries: Vec<&str> = to_currency.split(",").collect();
+    let currencies: Vec<&str> = to_currency.split(",").collect();
     let mut results = Vec::new();
-    for country in &countries {
-        if let Some(rate) = value["rates"].get(country) {
-            results.push(format!("{} {}", rate, country));
+    for currency_code in &currencies {
+        if let Some(rate) = value["rates"].get(currency_code) {
+            results.push(format!("{} {}", rate, currency_code));
         }
     }
     println!("\n{} {} = {}", amount, from_currency, results.join(", "));
